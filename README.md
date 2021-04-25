@@ -1,1 +1,1 @@
-# holbertonschool-interview
+holbertonschool-interview
