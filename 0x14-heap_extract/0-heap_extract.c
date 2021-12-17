@@ -1,13 +1,13 @@
 #include "binary_trees.h"
 /**
- * heapify - fix the heap_max
- * @root: head of the heap tree
- * Return: Nothing
+ * heapify - Function that fix the heap max
+ * @root: pointer to the head of the heap tree
+ * Return: void function
  */
 void heapify(binary_tree_t *root)
 {
 	binary_tree_t *child = NULL;
-	int tem_num = 0;
+	int num = 0;
 
 	while (1)
 	{
@@ -26,43 +26,43 @@ void heapify(binary_tree_t *root)
 		if (root->n >= child->n)
 			break;
 
-		tem_num = root->n;
+		num = root->n;
 		root->n = child->n;
-		child->n = tem_num;
+		child->n = num;
 
 		root = child;
 	}
 }
 
 /**
- * get_num_nodes - get the number of nodes of heap tree
- * @root: head of the heap tree
- * Return: all the nodes in heap tree
+ * num_nodes - Function that stores the number of nodes of heap tree
+ * @root: Pointer to the head of the heap tree
+ * Return: number of nodes in heap tree
  */
-int get_num_nodes(heap_t *root)
+int num_nodes(heap_t *root)
 {
 	int l = 0, r = 0;
 
 	if (!root)
 		return (0);
 
-	l = get_num_nodes(root->left);
-	r = get_num_nodes(root->right);
+	l = num_nodes(root->left);
+	r = num_nodes(root->right);
 
 	return (1 + l + r);
 }
 
 /**
- * get_last_node - get the last node in heap_min
- * @root: head of the heap tree
- * Return: last node in heap_min
+ * last_node_func - Function that gets the last node in heap min
+ * @root: pointer to the head of the heap tree
+ * Return: The last node in heap min
  */
-binary_tree_t *get_last_node(heap_t *root)
+binary_tree_t *last_node_func(heap_t *root)
 {
 	int nodes = 0, size_heap = 0;
 	binary_tree_t *last_node = NULL;
 
-	size_heap = get_num_nodes(root);
+	size_heap = num_nodes(root);
 
 	for (nodes = 1; nodes <= size_heap; nodes <<= 1)
 		;
@@ -79,9 +79,9 @@ binary_tree_t *get_last_node(heap_t *root)
 	return (last_node);
 }
 /**
- * heap_extract -  extracts the root node of a Max Binary Heap.
- * @root: a double pointer to the root node of the heap.
- * Return: If your function fails, return 0 otherwise root node number.
+ * heap_extract - Function that extracts the root node of a Max Binary Heap.
+ * @root: Double pointer to the root node of the heap.
+ * Return: Value stored in the root node, or 0 if fail.
  */
 int heap_extract(heap_t **root)
 {
@@ -102,7 +102,7 @@ int heap_extract(heap_t **root)
 	head_node = *root;
 	extracted_num = head_node->n;
 
-	last_node = get_last_node(*root);
+	last_node = last_node_func(*root);
 
 	if (last_node->parent->left == last_node)
 		last_node->parent->left = NULL;
